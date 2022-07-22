@@ -1,6 +1,6 @@
 # Button
 
-Open challenge. See blank webpage. Confused (⊙_⊙)？.
+Open challenge. See blank webpage. Very confused (⊙_⊙)？.
 
 Click around a bit. An alert pops up:
 
@@ -10,13 +10,13 @@ There must be invisbile buttons. Right click 'Inspect'. Check DOM.
 
 ![Inspect DOM](./button-inspect-dom.png)
 
-Correct, there are buttons. Lots and lots of buttons, with `.not-sus-button` CSS class and `notSusFunction()` for `onclick` attribute
+Correct, there are buttons. Lots and lots and lots of buttons, each with `.not-sus-button` CSS class and a `notSusFunction()` for `onclick` attribute
 
-So flag is probably linked to button with a different css class or button. We designate the 'flag button'.
+So flag is probably linked to button with a different css class or button. But how to get 'flag button'?
 
 Check `<head></head>` on a whim. Notice `<style></style>` tag only has the `.not-sus-button`. So, flag button must also have that same class. Very sneaky.
 
-To get unique button, use `console` to delete all buttons with the `onclick` attribute equal to `notSusFunction()`.
+Want to isolate flag button, so use `console` to delete all buttons with the `onclick` attribute equal to `notSusFunction()`.
 
 ```js
 >> const getFlagBtn = () => {
@@ -31,11 +31,26 @@ To get unique button, use `console` to delete all buttons with the `onclick` att
 
 ![Remove Buttons](./button-remove-buttons.png)
 
-Check DOM. Update button style so it is visible. Click button. Obtain flag :)
+Check DOM. Yay, only one button left. Update button style to see it.
+
+```CSS
+.not-sus-button {
+    border: none;
+    padding: 1em;
+    background: black;
+    color: white;
+}
+```
+
+Click button. Obtain flag :)
 
 ![Found Flag](./button-found-flag.png)
 
-Alternatively, script tag must be hidden in body somewhere because it is not in head.
+---
+
+## Alternate Solution
+
+Alternatively, get script tag text because script gives functionality. Anyways, might as well check. Script tag must be hidden in body somewhere because it is not in head.
 
 ```js
 >> document.body.getElementsByTagName("SCRIPT")[0].innerHTML;
@@ -44,4 +59,10 @@ Alternatively, script tag must be hidden in body somewhere because it is not in 
 
 ![Peak at Script](./button-peak-script.png)
 
-The flag, `y0u_f0und_7h3_f1ag`, is written at end of string.
+Look, `y0u_f0und_7h3_f1ag` is written at end of string.
+
+---
+
+## Reflection
+
+Ez, but fun. Good intro to CTFs.
